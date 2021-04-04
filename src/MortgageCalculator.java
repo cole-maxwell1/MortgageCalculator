@@ -8,6 +8,10 @@ public class MortgageCalculator {
         final byte PERCENT = 100;
         Scanner userScanner = new Scanner(System.in);
 
+    /**
+     * Ask user for Principle of loan. Also checks if amount is 
+     * between $1k - $1M
+     */
         System.out.print("Principle ($1k - $1M): ");
         int principle = userScanner.nextInt();
         while (!(principle >= 1000) || !(principle <= 1_000_000)) {
@@ -16,6 +20,10 @@ public class MortgageCalculator {
             principle = userScanner.nextInt();
         } // end while
 
+        /**
+         * Asks user for Annual Intrest Rate. 
+         * Checks for value between 0 and 30
+         */
         System.out.print("Annual Interest Rate: ");
         float enteredRate = userScanner.nextFloat();
         float monthlyRate = (enteredRate / PERCENT) / MONTHS_IN_YEAR;
@@ -25,6 +33,10 @@ public class MortgageCalculator {
             enteredRate = userScanner.nextFloat();
         }// end while
 
+        /**
+         * Asks user for length of load in years. 
+         * Checks for value between 1 and 30
+         */
         System.out.print("Period (Years): ");
         int yearsEntered = userScanner.nextInt();
         int numberOfPayments = yearsEntered * MONTHS_IN_YEAR;
@@ -34,6 +46,9 @@ public class MortgageCalculator {
             yearsEntered = userScanner.nextInt();
         }
 
+    /**
+     * Calculation of loan based on user input
+     */
         float monthlyPayment = (float) (principle * (
                 (monthlyRate * Math.pow((1 + monthlyRate), numberOfPayments))
                 / (Math.pow((1 + monthlyRate), numberOfPayments) - 1)
